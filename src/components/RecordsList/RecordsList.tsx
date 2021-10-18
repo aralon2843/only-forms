@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRecords } from '../../store/profile/actions';
@@ -33,6 +34,19 @@ const RecordsList: React.FC<IRecordsList> = ({ accessToken }): JSX.Element => {
 
   useEffect(() => {
     accessToken && dispatch(fetchRecords(accessToken));
+    
+    // const data = {
+    //   name: "Анатолий Кузнецов Иванович",
+    //   phone: "+78005553535",
+    //   doctor: "2",
+    //   date: new Date().toJSON(),
+    //   isChild: true,
+    // }
+
+    // axios.delete("http://clinic.studio-mind.ru/records/6",{
+    //   headers: { Authorization: `Bearer ${accessToken}` },
+    // })
+
   }, [accessToken, dispatch]);
 
   return (
@@ -53,7 +67,7 @@ const RecordsList: React.FC<IRecordsList> = ({ accessToken }): JSX.Element => {
             <ListItem key={record.id}>
               <ListItemElement>{record.name}</ListItemElement>
               <ListItemElement>
-                {record.doctor || 'Не установлен'}
+                {`${record.doctor?.firstName} ${record.doctor?.lastName}`}
               </ListItemElement>
               <ListItemElement>{record.phone}</ListItemElement>
               <ListItemElement>

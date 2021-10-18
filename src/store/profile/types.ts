@@ -9,7 +9,7 @@ export interface IRecord {
   id?: number;
   name: string;
   phone: string;
-  doctor: string;
+  doctor: IDoctor;
   date: string;
   isChild: boolean;
 }
